@@ -1,1 +1,2 @@
-# angular_2tabs
+TASK:
+https://github.com/KovalchukD/testTask

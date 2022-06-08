@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="table table__first">
+      <h2>Product list</h2>
+      <table 
+        mat-table [dataSource]="productList" 
+        class="mat-elevation-z8"
+      >
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let product"> {{productList.indexOf(product) + 1}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td (click)="selectProduct(product)" mat-cell *matCellDef="let product"> {{product.ProductDescription}} </td>
+        </ng-container>
+        
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsFirstTable"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsFirstTable;"></tr>
+      </table>
+  </div>
+  
+  <div class="table table__second">
+    <h2>Details</h2>
+    <div *ngIf="show" class="table__second_container">
+      <table 
+        mat-table [dataSource]="this.displayedRowsSecondTable" 
+        class="mat-elevation-z8 table__second_tab"
+      >
+        <ng-container matColumnDef="option">
+          <th mat-header-cell *matHeaderCellDef> Option </th>
+          <td mat-cell *matCellDef="let element"> {{element[0]}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef> Desciption </th>
+          <td mat-cell *matCellDef="let element"> {{element[1]}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsSecondTable"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsSecondTable;"></tr>
+      </table>
+      
+      <button (click)="closer()" mat-stroked-button color="warn">Close</button>
+    </div>
+    <div *ngIf="!show">
+      <h4>Please, select product for details</h4>
+    </div>
+  </div>
+</div>
+
